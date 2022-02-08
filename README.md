@@ -8,7 +8,7 @@
 
 # Running the application
 
-`docker-compose up app` will take care of building and starting the application
+`docker-compose run --rm app` will take care of building and starting the application
 
 `docker-compose run --rm tests` will build the container if it doesn't exist and run the tests
 
