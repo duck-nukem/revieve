@@ -39,12 +39,12 @@ def generate_customer_ranking():
 
 
 def generate_product_customers():
-    customers_by_product_id = defaultdict(list)
+    customers_by_product_id = defaultdict(set)
 
     order: Order
     for order in OrderRepository().list():
         for product in order.products:
-            customers_by_product_id[product.id].append(str(order.customer.id))
+            customers_by_product_id[product.id].add(str(order.customer.id))
 
     CsvReport("product_customers").write(
         headers=["id", "customer_ids"],

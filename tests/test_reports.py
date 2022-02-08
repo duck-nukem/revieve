@@ -29,10 +29,10 @@ class TestReports(TestCase):
 
         self.assertEqual(
             ["id", "euros"],
-            patched_report.return_value.write.mock_calls[0].kwargs["headers"],
+            patched_report.return_value.typewrite.mock_calls[0].kwargs["headers"],
         )
         self.assertListEqual(
-            list(patched_report.return_value.write.mock_calls[0].kwargs["rows"]),
+            list(patched_report.return_value.typewrite.mock_calls[0].kwargs["rows"]),
             [[sample_order.id, sample_order.euros]],
         )
 
@@ -60,10 +60,10 @@ class TestReports(TestCase):
 
         self.assertEqual(
             ["id", "customer_ids"],
-            patched_report.return_value.write.mock_calls[0].kwargs["headers"],
+            patched_report.return_value.typewrite.mock_calls[0].kwargs["headers"],
         )
         self.assertListEqual(
-            list(patched_report.return_value.write.mock_calls[0].kwargs["rows"]),
+            list(patched_report.return_value.typewrite.mock_calls[0].kwargs["rows"]),
             [
                 [
                     str(hammer.id),
@@ -105,10 +105,10 @@ class TestReports(TestCase):
 
         self.assertEqual(
             ["id", "firstname", "lastname", "total_euros"],
-            patched_report.return_value.write.mock_calls[0].kwargs["headers"],
+            patched_report.return_value.typewrite.mock_calls[0].kwargs["headers"],
         )
         self.assertListEqual(
-            list(patched_report.return_value.write.mock_calls[0].kwargs["rows"]),
+            list(patched_report.return_value.typewrite.mock_calls[0].kwargs["rows"]),
             [
                 [
                     str(bob.id),
