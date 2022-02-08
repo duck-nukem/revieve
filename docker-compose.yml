@@ -2,9 +2,13 @@ version: "3.6"
 services:
   app: &app
     build: .
+    volumes:
+      - ./src:/opt/app
+      - ./output:/etc/output
 
   tests:
     <<: *app
-    command: ["python", "-m", "unittest", "discover", "/opt/app/tests"]
+    command: [ "python", "-m", "unittest" ]
     volumes:
+      - ./src:/opt/app
       - ./tests:/opt/app/tests

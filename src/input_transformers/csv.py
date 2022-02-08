@@ -3,7 +3,7 @@ from functools import reduce
 from pathlib import Path
 from typing import Any, Callable, List
 
-from src.input_transformers.exceptions import (
+from input_transformers.exceptions import (
     InvalidInputFileException,
     InvalidRowConfigurationException,
 )

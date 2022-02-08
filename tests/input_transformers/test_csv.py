@@ -3,8 +3,8 @@ from decimal import Decimal
 from pathlib import Path
 from unittest import TestCase
 
-from src.input_transformers.csv import transform
-from src.input_transformers.exceptions import (
+from input_transformers.csv import transform
+from input_transformers.exceptions import (
     InvalidInputFileException,
     InvalidRowConfigurationException,
 )

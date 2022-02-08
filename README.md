@@ -10,3 +10,9 @@
 `docker-compose up app` will take care of building and starting the application
 
 `docker-compose run --rm tests` will build the container if it doesn't exist and run the tests
+
+# Project structure
+
+`core` contains the core application logic. The only constraint that should apply here is the language itself. It should be agnostic of everything else (like whether there's a database, or any kind of persistent storage, whether it's a web app or a CLI, etc).
+
+`core` should use drivers or plugins to interact with the rest of the application. There should be an interface or abstract class that defines the interface. This should ensure a basic level of compatibility between different drivers/plugins that implement the interface or inherit from the class.

@@ -4,11 +4,11 @@ from decimal import Decimal
 from pathlib import Path
 from unittest import TestCase
 
-from src.core.repository.exceptions import (
+from core.repository.exceptions import (
     UnsupportedDataSourceException,
     ItemNotFoundException,
 )
-from src.repositories.file_based_repository import FileBasedRepository
+from repositories.file_based_repository import FileBasedRepository
 
 _PATH = Path(__file__).resolve().parent
 

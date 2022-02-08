@@ -1,12 +1,12 @@
 from pathlib import Path
 from typing import TypeVar, List, Callable
 
-from src.core.repository.base import Repository
-from src.core.repository.exceptions import (
+from core.repository.base import Repository
+from core.repository.exceptions import (
     UnsupportedDataSourceException,
     ItemNotFoundException,
 )
-from src.input_transformers.csv import transform
+from input_transformers.csv import transform
 
 T = TypeVar("T")
 
