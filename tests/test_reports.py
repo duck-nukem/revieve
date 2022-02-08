@@ -53,6 +53,7 @@ class TestReports(TestCase):
         hammer_orders = [
             alice_hammer_purchase,
             bob_hammer_purchase,
+            alice_hammer_purchase,
         ]
         patched_order_repository.return_value.list.return_value = hammer_orders
 
@@ -62,13 +63,17 @@ class TestReports(TestCase):
             ["id", "customer_ids"],
             patched_report.return_value.write.mock_calls[0].kwargs["headers"],
         )
-        self.assertListEqual(
-            list(patched_report.return_value.write.mock_calls[0].kwargs["rows"]),
+        self.assertEqual(
+            patched_report.return_value.write.mock_calls[0].kwargs["rows"][0][0],
+            str(hammer.id),
+        )
+        self.assertCountEqual(
+            patched_report.return_value.write.mock_calls[0]
+            .kwargs["rows"][0][1]
+            .split(" "),
             [
-                [
-                    str(hammer.id),
-                    f"{alice_hammer_purchase.customer.id} {bob_hammer_purchase.customer.id}",
-                ]
+                str(alice_hammer_purchase.customer.id),
+                str(bob_hammer_purchase.customer.id),
             ],
         )
 
