@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir --upgrade pip
 COPY src /opt/app
 WORKDIR /opt/app
 
-ENTRYPOINT ["python", "main.py"]
+CMD ["python", "main.py"]
