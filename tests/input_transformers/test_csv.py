@@ -1,6 +1,7 @@
 import unittest
 from decimal import Decimal
 from pathlib import Path
+from unittest import TestCase
 
 from src.input_transformers.csv import transform
 from src.input_transformers.exceptions import (
@@ -11,7 +12,7 @@ from src.input_transformers.exceptions import (
 _PATH = Path(__file__).resolve().parent
 
 
-class TestCsvInputTransformer(unittest.TestCase):
+class TestCsvInputTransformer(TestCase):
     def test_empty_file_raises_exception(self):
         with self.assertRaises(InvalidInputFileException):
             transform(_PATH / "samples/empty.csv")
