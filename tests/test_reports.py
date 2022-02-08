@@ -75,6 +75,7 @@ class TestReports(TestCase):
     def test_customer_ranking(self, patched_order_repository, patched_report):
         product = Product(id=1, name="Hammer", cost=Decimal("13.37"))
         customer = Customer(id=1, firstname="Alice", lastname="")
+        bob = Customer(id=2, firstname="Bob", lastname="")
         first_order = Order(
             id=1,
             customer=customer,
@@ -87,8 +88,15 @@ class TestReports(TestCase):
             products=[product],
             euros=product.cost,
         )
+        bobs_order = Order(
+            id=3,
+            customer=bob,
+            products=[product, product, product],
+            euros=product.cost * 3,
+        )
         orders = [
             first_order,
+            bobs_order,
             second_order,
         ]
         patched_order_repository.return_value.list.return_value = orders
@@ -103,11 +111,17 @@ class TestReports(TestCase):
             list(patched_report.return_value.write.mock_calls[0].kwargs["rows"]),
             [
                 [
+                    str(bob.id),
+                    bob.firstname,
+                    bob.lastname,
+                    bobs_order.euros,
+                ],
+                [
                     str(customer.id),
                     customer.firstname,
                     customer.lastname,
-                    product.cost * len(orders),
-                ]
+                    product.cost * 2,
+                ],
             ],
         )
 

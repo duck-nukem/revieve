@@ -14,19 +14,27 @@ def generate_order_prices():
 
 
 def generate_customer_ranking():
+    orders_sorted_by_customer_id = sorted(
+        OrderRepository().list(), key=lambda o: o.customer.id
+    )
+    sum_of_spent_amount_by_customer = [
+        [
+            str(customer.id),
+            customer.firstname,
+            customer.lastname,
+            sum(map(lambda o: o.euros, orders)),
+        ]
+        for customer, orders in groupby(
+            orders_sorted_by_customer_id,
+            key=lambda o: o.customer,
+        )
+    ]
+
     CsvReport("customer_ranking").write(
         headers=["id", "firstname", "lastname", "total_euros"],
-        rows=[
-            [
-                str(customer.id),
-                customer.firstname,
-                customer.lastname,
-                sum(map(lambda o: o.euros, orders)),
-            ]
-            for customer, orders in groupby(
-                OrderRepository().list(), key=lambda o: o.customer
-            )
-        ],
+        rows=sorted(
+            sum_of_spent_amount_by_customer, key=lambda row: row[3], reverse=True
+        ),
     )
 
 
